@@ -147,8 +147,13 @@
   </footer>
 </body>
 </html>
+<script> 
+<!-- 放在 </body> 之前或之后 -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+
 <script>
-const const firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyA123456789EXAMPLE",
     authDomain: "my-knowledge-site.firebaseapp.com",
     projectId: "my-knowledge-site",
@@ -157,6 +162,7 @@ const const firebaseConfig = {
     appId: "1:1234567890:web:abc123example"
   };
 
-  firebase.initializeApp(firebaseConfig);
+  // 初始化 Firebase
+  const app = firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
 </script>
