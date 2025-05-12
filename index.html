@@ -141,6 +141,15 @@
   <div class="cta">
     <button>立即加入会员</button>
   </div>
+ <div class="auth-box">
+    <h2>会员登录/注册</h2>
+    <input type="email" id="email" placeholder="请输入邮箱">
+    <input type="password" id="password" placeholder="请输入密码">
+    <button onclick="register()">注册</button>
+    <button onclick="login()">登录</button>
+    <button onclick="logout()">退出登录</button>
+  </div>
+    <div id="user-info">未登录</div>
 
   <footer>
     © 2025 我的知识平台. 版权所有.
@@ -160,6 +169,45 @@
     // 初始化 Firebase
     const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+     function register() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          alert('注册成功');
+        })
+        .catch(error => {
+          alert('注册失败: ' + error.message);
+        });
+    }
+
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          alert('登录成功');
+        })
+        .catch(error => {
+          alert('登录失败: ' + error.message);
+        });
+    }
+
+    function logout() {
+      auth.signOut().then(() => {
+        alert('已退出登录');
+      });
+    }
+
+    // 显示当前登录用户
+    auth.onAuthStateChanged(user => {
+      const userInfo = document.getElementById('user-info');
+      if (user) {
+        userInfo.textContent = `已登录：${user.email}`;
+      } else {
+        userInfo.textContent = '未登录';
+      }
+    });
   </script>
 </body>
 </html>
